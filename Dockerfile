@@ -10,7 +10,6 @@ RUN echo "root:gandusaala" | chpasswd
 
 EXPOSE 22
 
-# Copy files and install dependencies
 WORKDIR /
 COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt
