@@ -6,8 +6,7 @@ RUN apt-get update && \
 
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-RUN useradd -m -s /bin/bash bilbo
-RUN echo "bilbo:gandusaala" | chpasswd
+RUN echo "root:gandusaala" | chpasswd
 
 EXPOSE 22
 
@@ -16,5 +15,4 @@ WORKDIR /
 COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Start SSH server and run your script
 CMD service ssh start && bash start.sh
