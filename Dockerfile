@@ -3,7 +3,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install -y python3 python3-pip
 
-WORKDIR /app
+WORKDIR .
 
 RUN apt-get install -y nano
 
