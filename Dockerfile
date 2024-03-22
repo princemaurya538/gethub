@@ -1,14 +1,21 @@
 FROM ubuntu:latest
 
+# Install necessary packages
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip
+    apt-get install -y openssh-server python3 python3-pip nano
 
-WORKDIR .
+# Set up SSH
+RUN mkdir /var/run/sshd
+RUN echo 'root:password' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-RUN apt-get install -y nano
+# Expose SSH port
+EXPOSE 22
 
+# Copy files and install dependencies
+WORKDIR /
 COPY . .
-
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-CMD bash start.sh
+# Start SSH server and run your script
+CMD ["/bin/bash", "-c", "/etc/init.d/ssh start && bash start.sh && /bin/bash"]
