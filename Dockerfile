@@ -14,4 +14,4 @@ WORKDIR /
 COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-CMD service ssh start & bash start
+CMD service ssh start & bash start.sh
